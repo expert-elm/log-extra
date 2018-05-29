@@ -7,11 +7,13 @@ import _log, {
   tlog,
   ok,
   tok,
+  error,
   mapStatusToColor as mapsc,
   mapStatusToConsoleMethod as mapscm
 } from './'
 
 test('should run with log options', () => {
+  process.env.LOGGER_ENV = 'terminal'
   expect(
     _log(['foo'], 'bar')
   ).toEqual(
@@ -83,7 +85,8 @@ test('should map status to console methods', () => {
 
 
 
-test('should return from log', () => {
+test('should return from log for terminal env', () => {
+  process.env.LOGGER_ENV = 'terminal'
   expect(
     log('foo')
   ).toEqual(
@@ -91,7 +94,7 @@ test('should return from log', () => {
   )
 
   expect(
-    log('[foo]bar')
+    error('[foo]bar')
   ).toEqual(
     'bar'
   )
@@ -111,7 +114,7 @@ test('should return from log', () => {
   expect(
     tlog('foo')()
   ).toEqual(
-    'foo'
+    undefined
   )
 
   expect(
@@ -129,7 +132,64 @@ test('should return from log', () => {
   expect(
     tlog('foo', 'bar')()
   ).toEqual(
+    undefined
+  )
+
+  expect(
+    tlog('foo', 'bar')('baz')
+  ).toEqual(
+    'baz'
+  )
+})
+
+test('should return from log for browser env', () => {
+  process.env.LOGGER_ENV = 'browser'
+  expect(
+    log('foo')
+  ).toEqual(
     'foo'
+  )
+
+  expect(
+    error('[foo]bar')
+  ).toEqual(
+    'bar'
+  )
+
+  expect(
+    log('[foo]', 'bar')
+  ).toEqual(
+    'bar'
+  )
+
+  expect(
+    log('foo', 'bar')
+  ).toEqual(
+    'foo'
+  )
+
+  expect(
+    tlog('foo')()
+  ).toEqual(
+    undefined
+  )
+
+  expect(
+    tlog('foo')('bar')
+  ).toEqual(
+    'bar'
+  )
+
+  expect(
+    tlog('foo', 'bar')('')
+  ).toEqual(
+    ''
+  )
+
+  expect(
+    tlog('foo', 'bar')()
+  ).toEqual(
+    undefined
   )
 
   expect(

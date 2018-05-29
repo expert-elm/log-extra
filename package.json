@@ -1,16 +1,18 @@
 {
   "name": "@rabbitcc/logger",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A log tool",
   "main": "lib/terminal.js",
   "scripts": {
     "start": "npm run build && node bin/cli.js",
+    "prebuild": "rm lib/* -rf",
     "build": "cross-env NODE_ENV=development npx webpack -r esm",
     "build:prod": "cross-env NODE_ENV=production npx webpack -r esm",
     "test": "npx jest --verbose",
     "test:co": "npx jest --verbose --coverage",
     "type": "npx flow check",
-    "prepublishOnly": "npm run test && npm run type && npm run build:prod"
+    "prepublishOnly": "npm run test && npm run type && npm run build:prod",
+    "postpublish": "echo 42"
   },
   "keywords": [],
   "author": "Rabbit<yfhj1990@hotmail.com>",
@@ -36,5 +38,8 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "moment": "^2.22.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -87,7 +87,7 @@ export default function _log<T>(contents: Array<string>, action: string, options
   const colorfx = mapStatusToColor(status)
 
   /**
-   * datetime or timestamp
+   * current datetime or timestamp
    */
   let now
   if('boolean' === typeof datetime) {
@@ -99,22 +99,22 @@ export default function _log<T>(contents: Array<string>, action: string, options
   /**
    * output
    */
-  if('terminal' === process.env.LOGGER_ENV) {
+  let thunk
+
+  if('browser' !== process.env.LOGGER_ENV) {
     const chalk = require('chalk')
 
     const str = format
           .replace('{{DATETIME}}', chalk[colorfx + 'Bright'](now))
           .replace('{{ACTION}}', action ? ' ' + chalk.bold[colorfx](action) : '')
 
-    logfx.apply(console, [str].concat(contents))
-  }
-
-  if('browser' === process.env.LOGGER_ENV) {
+    thunk = () => logfx.apply(console, [str].concat(contents))
+  } else {
     const str = format
           .replace('{{DATETIME}}', '%c' + now + '%c')
-          .replace('{{ACTION}}', '%c' + action + '%c')
+          .replace('{{ACTION}}', action ? ' ' + '%c' + action + '%c' : '')
 
-    logfx.apply(console, [
+    thunk = () => logfx.apply(console, [
       str,
       `color:${colors[colorfx]};`,
       `color:inherit;`,
@@ -124,9 +124,13 @@ export default function _log<T>(contents: Array<string>, action: string, options
   }
 
   if(!lazy) {
+    thunk()
     return contents[0]
   } else {
-    return a => (undefined !== a ? a : contents[0])
+    return a => {
+      thunk()
+      return a
+    }
   }
 }
 
@@ -152,9 +156,7 @@ export function mapStatusToColor(status: Status): string {
     case 'warn':
       return 'yellow'
     default:
-      throw new Error(fail('Unknow status', 'logger.internal', {
-        lazy: false
-      }))
+      throw new Error(fail('[logger.internal]Unknow status:', status))
   }
 }
 
@@ -197,7 +199,6 @@ function parseAction(obj: any): string {
 
   return matched[1]
 }
-
 
 
 /**
