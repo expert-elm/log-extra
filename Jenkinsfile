@@ -18,11 +18,4 @@ pipeline {
             }
         }
     }
-    stage('Test') {
-      steps {
-        echo 'CI Test'
-        sh 'npm test'
-      }
-    }
-  }
 }
