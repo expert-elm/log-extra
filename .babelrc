@@ -30,7 +30,13 @@
   "env": {
     "test": {
       "plugins": [
-        "@babel/plugin-transform-modules-commonjs"
+        "@babel/plugin-transform-modules-commonjs",
+        "@rabbitcc/babel/in-test"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "@rabbitcc/babel/remove-test"
       ]
     }
   }

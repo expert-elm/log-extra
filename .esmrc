@@ -1,3 +1,4 @@
 {
-  "cjs": true
+  "cjs": true,
+  "cache": false
 }
