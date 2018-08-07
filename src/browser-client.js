@@ -5,8 +5,14 @@
  */
 
 import startsCase from './starts-case'
+import type { Provider } from './'
 
-export default function handler({ level, color }, name, datetime, action, content) {
+export default function handler({ level, color }: Provider,
+                                name: string,
+                                datetime: string,
+                                action: string,
+                                content: string): () => void {
+
   if(!Array.isArray(color) || 0 === color.length) {
     throw new Error(
       `Can't find provider color, the color should be [color1, color2, color3]`
@@ -32,7 +38,11 @@ export default function handler({ level, color }, name, datetime, action, conten
   }
 }
 
-function makeTpl(level, color, name, datetime, action) {
+function makeTpl(level: string,
+                 color: string,
+                 name: string,
+                 datetime: string,
+                 action: string): Array<string> {
   return [
     `%c${name.substr(0, 3).padStart(3, ' ')}|%c%c ${datetime} [${level.toUpperCase().padStart(5, ' ')}] %c%c<${action}>%c`,
     `${color};font-weight: bolder;`, '',

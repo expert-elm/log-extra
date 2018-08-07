@@ -27,16 +27,18 @@ import chalk from 'chalk'
 import fmt from './datetime-formater'
 import pvd from './default-provider'
 
-type Provider = {
-  level: 'string',
+export type Provider = {
+  level: string,
   weight: number,
   color: [string, string]
 }
 
+export type Handler = (Provider, string, string, string, string) => () => void
+
 type Options = {
   provider: Provider,
   level: number,
-  handler: (string, string, string) => () => void
+  handler: Handler
 }
 
 export function createLogger({ provider, level, handler }: Options) {
@@ -57,7 +59,7 @@ const handler = 'undefined' === typeof window
       ? require('./terminal-client').default
       : require('./browser-client').default
 
-const level = process.env.LOGGER_LEVEL || pvd.info.weight
+const level = parseInt(process.env.LOGGER_LEVEL) || pvd.info.weight
 
 export const trace = createLogger({ handler, level, provider: pvd.trace })
 export const debug = createLogger({ handler, level, provider: pvd.debug })

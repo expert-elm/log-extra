@@ -6,8 +6,13 @@
 
 import chalk from 'chalk'
 import startsCase from './starts-case'
+import type { Provider } from './'
 
-export default function handler({ level, color }, name, datetime, action, content) {
+export default function handler({ level, color }: Provider,
+                                name: string,
+                                datetime: string,
+                                action: string,
+                                content: string): () => void {
   if(!Array.isArray(color) || 0 === color.length) {
     throw new Error(
       `Can't find provider color, the color should be [color1, color2, color3]`
@@ -30,6 +35,9 @@ export default function handler({ level, color }, name, datetime, action, conten
   }
 }
 
-function makeTpl(level, name, datetime, action) {
+function makeTpl(level: string,
+                 name: string,
+                 datetime: string,
+                 action: string): string {
   return `${chalk.bold(name.substr(0, 3).padStart(3, ' '))}| ${datetime} [${level.toUpperCase().padStart(5, ' ')}] <${chalk.bold(action)}>`
 }

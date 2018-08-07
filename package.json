@@ -1,6 +1,6 @@
 {
   "name": "@rabbitcc/logger",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "A log tool",
   "main": "lib/terminal.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "author": "Rabbit<yfhj1990@hotmail.com>",
   "license": "GPL-3.0",
   "files": [
-    "lib"
+    "index.js"
   ],
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.49",
