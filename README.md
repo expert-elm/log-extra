@@ -3,6 +3,15 @@ Yet anthor logger tool
 
 Works on Nodejs and Browsers
 
+Terminal:
+
+![Terminal](https://user-images.githubusercontent.com/5752902/43772620-47e41182-9a75-11e8-9632-68d5944db477.png)
+
+Browser:
+
+![browser](https://user-images.githubusercontent.com/5752902/43772620-47e41182-9a75-11e8-9632-68d5944db477.png)
+
+
 ## Install
 
 ```sh
@@ -15,7 +24,6 @@ npm i -D @rabbitcc/logger
 import log from '@rabbitcc/logger'
 
 log.info('name', 'action', 'contents')
-
 ```
 
 
@@ -25,7 +33,6 @@ log.info('name', 'action', 'contents')
 // via cross-env scripts
 
 cross-env LOGGER_LEVEL=DEBUG
-
 ```
 
 Or if you want works on browser, can pass the evn via `webpack.EnvironmentPlugin`
@@ -40,4 +47,13 @@ plugins: [
 
   new EnvironmentPlugin({ LOGGER_LEVEL: 'DEBUG' }),
 ]
+```
+
+
+### Log sync on terimux and browser via webpack-serve scoket server
+
+```js
+import log from '@rabbitcc/logger/browser-socket'
+
+log.info('name', 'action', 'contents')
 ```

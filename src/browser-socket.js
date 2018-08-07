@@ -7,7 +7,7 @@
 import log from './'
 
 const cache = []
-const ws = new WebSocket(process.env.LOGGER_SOCKET || 'ws://localhost:8081')
+const ws = new window.WebSocket(process.env.LOGGER_SOCKET || 'ws://localhost:8081')
 
 ws.addEventListener('message', function(evt) {
   const data = JSON.parse(evt.data)
@@ -24,8 +24,8 @@ ws.addEventListener('open', function(evt) {
   cache.forEach(thunk => thunk())
 })
 
-function makeSend(level) {
-  return function send(...args) {
+function makeSend(level: string) {
+  return function send(...args: Array<string>) {
     const state = ws.readyState
     const thunk = () => {
       ws.send(JSON.stringify({
