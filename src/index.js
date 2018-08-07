@@ -26,6 +26,7 @@
 import chalk from 'chalk'
 import fmt from './datetime-formater'
 import pvd from './default-provider'
+import map from './level-mapper.js'
 
 export type Provider = {
   level: string,
@@ -59,7 +60,7 @@ const handler = 'undefined' === typeof window
       ? require('./terminal-client').default
       : require('./browser-client').default
 
-const level = parseInt(process.env.LOGGER_LEVEL) || pvd.info.weight
+const level = map(process.env.LOGGER_LEVEL) || pvd.info.weight
 
 export const trace = createLogger({ handler, level, provider: pvd.trace })
 export const debug = createLogger({ handler, level, provider: pvd.debug })
