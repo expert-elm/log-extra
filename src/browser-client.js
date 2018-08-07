@@ -24,7 +24,7 @@ export default function handler({ level, color }, name, datetime, action, conten
     const spliter = 1 === sp.length ? '-' : '|'
     sp.forEach(str => {
       console.log.apply(console, [
-        ...makeTpl,
+        ...tpl,
         spliter,
         str
       ])

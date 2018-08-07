@@ -1,10 +1,4 @@
 import path from 'path'
-import {
-  EnvironmentPlugin,
-  ContextReplacementPlugin
-} from 'webpack'
-
-const locales = process.env.MOMENT_LOCALS || 'en'
 
 export default {
   mode: process.env.NODE_ENV,
@@ -22,11 +16,11 @@ export default {
       use: 'babel-loader'
     }]
   },
+  optimization: {
+    minimize: false
+  },
   plugins: [
-    new EnvironmentPlugin({
-      NODE_ENV: false,
-      DEBUG: false
-    })
+
   ],
   externals: [
     'chalk'

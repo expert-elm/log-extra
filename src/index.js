@@ -40,11 +40,10 @@ type Options = {
 }
 
 export function createLogger({ provider, level, handler }: Options) {
-  if(provider.weight > level) {
-    return undefined
-  }
-
   return function log(name: string, action: string, content: string): void {
+    if(provider.weight > level) {
+      return
+    }
     const datetime = fmt(new Date())
     handler(provider, name, datetime, action, content)()
   }
@@ -58,7 +57,7 @@ const handler = 'undefined' === typeof window
       ? require('./terminal-client').default
       : require('./browser-client').default
 
-const level = pvd.info.weight
+const level = process.env.LOGGER_LEVEL || pvd.info.weight
 
 export const trace = createLogger({ handler, level, provider: pvd.trace })
 export const debug = createLogger({ handler, level, provider: pvd.debug })
