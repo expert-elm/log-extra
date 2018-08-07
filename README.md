@@ -15,13 +15,13 @@ Browser:
 ## Install
 
 ```sh
-npm i -D @rabbitcc/logger
+npm i -D @rabbitcc/log
 ```
 
 ## Usage
 
 ```js
-import log from '@rabbitcc/logger'
+import log from '@rabbitcc/log'
 
 log.info('name', 'action', 'contents')
 ```
@@ -53,7 +53,7 @@ plugins: [
 ### Log sync on terminal and browser via `webpack-hot-client` socket server
 
 ```js
-import log from '@rabbitcc/logger/browser-socket'
+import log from '@rabbitcc/log/browser-socket'
 
 log.info('name', 'action', 'contents')
 ```
