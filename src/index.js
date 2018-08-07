@@ -48,7 +48,7 @@ export function createLogger({ provider, level, handler }: Options) {
       return
     }
     const datetime = fmt(new Date())
-    handler(provider, name, datetime, action, content)()
+    handler(provider, name, datetime, action, String(content))()
   }
 }
 
