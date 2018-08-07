@@ -50,7 +50,7 @@ plugins: [
 ```
 
 
-### Log sync on terimux and browser via webpack-serve scoket server
+### Log sync on terminal and browser via `webpack-hot-client` socket server
 
 ```js
 import log from '@rabbitcc/logger/browser-socket'
