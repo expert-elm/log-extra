@@ -5,7 +5,7 @@ Works on Nodejs and Browsers
 
 Terminal:
 
-![Terminal](https://user-images.githubusercontent.com/5752902/43772620-47e41182-9a75-11e8-9632-68d5944db477.png)
+![Terminal](https://user-images.githubusercontent.com/5752902/43772728-a6ec9fbe-9a75-11e8-95bc-7d6fe7a9aa72.png)
 
 Browser:
 
