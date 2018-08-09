@@ -53,7 +53,25 @@ plugins: [
 ### Log sync on terminal and browser via `webpack-hot-client` socket server
 
 ```js
-import log from '@rabbitcc/log/browser-socket'
+import log, { createSocket } from '@rabbitcc/log/socket'
+
+if('production' !== process.env.NODE_ENV) {
+  createSocket()
+}
 
 log.info('name', 'action', 'contents')
+```
+
+and log from terminal to browser:
+
+```js
+import { createSocket } from '@rabbitcc/log/socket'
+
+serve: {
+  on: {
+    listening() {
+      createSocket()
+    }
+  }
+}
 ```

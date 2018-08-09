@@ -1,10 +1,10 @@
 {
   "name": "@rabbitcc/log",
-  "version": "0.2.6",
+  "version": "0.3.4",
   "description": "A log tool",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node bin/cli.js",
+    "start": "npm run build",
     "build": "cross-env NODE_ENV=production npx webpack -r esm",
     "test": "cross-env NODE_ENV=test npx mocha --exit -r jsdom-global/register -r @babel/register -r esm src",
     "type": "npx flow check",
@@ -15,7 +15,7 @@
   "license": "GPL-3.0",
   "files": [
     "index.js",
-    "browser-socket.js"
+    "socket.js"
   ],
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.49",
@@ -35,7 +35,9 @@
     "webpack-cli": "^2.1.5"
   },
   "dependencies": {
-    "chalk": "^2.4.1"
+    "chalk": "^2.4.1",
+    "isomorphic-ws": "^4.0.1",
+    "ws": "^6.0.0"
   },
   "publishConfig": {
     "access": "public"

@@ -2,7 +2,6 @@ import path from 'path'
 
 export default [{
   mode: process.env.NODE_ENV,
-  target: 'web',
   node: false,
   entry: path.resolve('src/index.js'),
   output: {
@@ -29,12 +28,11 @@ export default [{
   ]
 },{
   mode: process.env.NODE_ENV,
-  entry: path.resolve('src/browser-socket.js'),
-  target: 'web',
+  entry: path.resolve('src/socket.js'),
   node: false,
   output: {
     path: path.resolve('.'),
-    filename: 'browser-socket.js',
+    filename: 'socket.js',
     library: 'Logger',
     libraryTarget: 'umd',
     globalObject: 'this'
@@ -53,6 +51,7 @@ export default [{
   ],
   externals: [
     'chalk',
+    'isomorphic-ws',
     './'
   ]
 }]
