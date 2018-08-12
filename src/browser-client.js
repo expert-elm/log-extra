@@ -15,7 +15,8 @@ export default function handler({ level, color }: Provider,
 
   if(!Array.isArray(color) || 0 === color.length) {
     throw new Error(
-      `Can't find provider color, the color should be [color1, color2, color3]`
+      `Can't find provider color, the color should be \
+[color1, color2, color3, ...and more optional colors]`
     )
   }
 

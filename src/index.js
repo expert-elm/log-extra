@@ -26,7 +26,8 @@
 import chalk from 'chalk'
 import fmt from './datetime-formater'
 import pvd from './default-provider'
-import map from './level-mapper.js'
+import parse from './level-parser'
+import parseStack from './stack-parser'
 
 export type Provider = {
   level: string,
@@ -48,6 +49,8 @@ export function createLogger({ provider, level, handler }: Options) {
       return
     }
     const datetime = fmt(new Date())
+    const stack = parseStack(new Error().stack)
+    console.log(stack)
     handler(provider, name, datetime, action, String(content))()
   }
 }
@@ -60,7 +63,7 @@ const handler = 'undefined' === typeof window
       ? require('./terminal-client').default
       : require('./browser-client').default
 
-const level = map(process.env.LOGGER_LEVEL) || pvd.info.weight
+const level = parse(process.env.LOGGER_LEVEL) || pvd.info.weight
 
 export const trace = createLogger({ handler, level, provider: pvd.trace })
 export const debug = createLogger({ handler, level, provider: pvd.debug })
@@ -76,4 +79,47 @@ export default {
   warn,
   error,
   fatal
+}
+
+
+/**
+ * test
+ */
+
+import assert from 'assert'
+import fs from 'fs'
+import puppeteer from 'puppeteer'
+
+describe('browser test', function() {
+  const script = fs.readFileSync('./index.js', 'utf-8')
+  it('page', function(done) {
+    browserConsoleOutput({
+      requires: [
+        'process = {};process.env = {};',
+        script
+      ],
+      script: 'Logger.info("foo", "bar", "baz")'
+    }).catch(done).then(res => {
+      console.log(res)
+      assert(res)
+      done()
+    })
+  })
+})
+
+function browserConsoleOutput({ requires = [], script = '' }) {
+  return new Promise((res, rej) => {
+    puppeteer.launch().then(browser => {
+      browser.newPage().then(page => {
+        page.evaluate(requires.join(';;')).then(() => {
+          page.once('console', msg => {
+            Promise.all(msg.args().map(arg => arg.jsonValue())).then(args => {
+              res(args)
+            }).catch(rej)
+          })
+          page.evaluate(script).catch(rej)
+        }).catch(rej)
+      }).catch(rej)
+    }).catch(rej)
+  })
 }
