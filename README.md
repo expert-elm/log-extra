@@ -72,10 +72,10 @@ There is some build-in logger levels:
 
 By the way, the `FATAL` level will highlight by background color.
 
-<details>
-<summary>
-Feature, log sync on terminal and browser via `webpack-hot-client` socket server
-</summary>
+
+
+### Feature, log sync on terminal and browser via `webpack-hot-client` socket server
+
 
 ```js
 import log, { createSocket } from '@rabbitcc/log/socket'
@@ -100,13 +100,11 @@ serve: {
   }
 }
 ```
-</details>
 
 
-<details>
-<summary>
-Feature, log with origin file position
-</summary>
+
+### Feature, log with origin file position
+
 
 ![show origin file position](https://user-images.githubusercontent.com/5752902/44018351-0b1d63dc-9f0e-11e8-9b02-7625db60f730.png)
 
@@ -141,4 +139,3 @@ In browser, you need to add folder to **chrome devtools workspace**.
 This feature also works on terminal. Your terminal should support hyperlinks.
 
 ![cmder hyperlinks](https://user-images.githubusercontent.com/5752902/44021314-10aac3d6-9f17-11e8-9c9b-dd264dc058a5.gif)
-</details>
