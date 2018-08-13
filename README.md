@@ -73,9 +73,9 @@ There is some build-in logger levels:
 By the way, the `FATAL` level will highlight by background color.
 
 <details>
-<summary>
-<h3>Feature, log sync on terminal and browser via `webpack-hot-client` socket server</h3>
-</summary>
+
+<h3><summary>Feature, log sync on terminal and browser via `webpack-hot-client` socket server</summary></h3>
+
 
 ```js
 import log, { createSocket } from '@rabbitcc/log/socket'
