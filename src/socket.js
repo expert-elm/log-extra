@@ -10,7 +10,11 @@ import WebSocket from 'isomorphic-ws'
 
 const cache = []
 
-export function createSocket(socket: string = 'ws://localhost:8081'): void {
+type Options = {
+  socket?: string
+}
+
+export function createSocket({ socket = 'ws://localhost:8081' }: Options = {}): void {
   /**
    * check global socket was exists
    */
@@ -26,13 +30,13 @@ export function createSocket(socket: string = 'ws://localhost:8081'): void {
       return
     }
 
-    const { level, args } = data.data
+    const { level, metadata, args } = data.data
 
-    log[level].apply(null, args)
+    log[level].apply(metadata, args)
   })
 
   ws.addEventListener('open', function(evt) {
-    cache.forEach(thunk => thunk())
+    cache.forEach(thunk => thunk(ws))
   })
 
   global.LOGGER_SOCKET = ws
@@ -41,31 +45,24 @@ export function createSocket(socket: string = 'ws://localhost:8081'): void {
 function makeSend(level: string) {
   return function send(...args: Array<string>) {
     const ws = global.LOGGER_SOCKET
+    const metadata = this || {}
 
-    /**
-     * check global socket was exists
-     */
-    if(!ws) {
-      throw new Error(
-        `WebSocket not initial, should call "createSocket()" first`
-      )
-    }
-
-    const thunk = () => {
+    const thunk = ws => {
       ws.send(JSON.stringify({
         type: 'broadcast',
         data: {
           type: 'logger',
           data: {
             level,
+            metadata,
             args
           }
         }
       }))
     }
 
-    if(1 === ws.readyState) {
-      thunk()
+    if(ws && 1 === ws.readyState) {
+      thunk(ws)
     } else {
       cache.push(thunk)
     }
