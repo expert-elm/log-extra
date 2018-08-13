@@ -151,14 +151,18 @@ describe('browser client', function() {
   })
 
   it('should throw when color not given', function() {
-    assert.throws(() => {
-      handler({ color: [] })
-    }, {
-      name: 'Error',
-      message: `\
+    assert.throws(
+      () => {
+        handler({ level: 'debug', color: [], weight: 42 }, {}, '', '', '', '')
+      },
+      // $FlowFixMe
+      {
+        name: 'Error',
+        message: `\
 Can't find provider color, the color should be \
 [color1, color2, color3, ...and more optional colors]`
-    })
+      }
+    )
   })
 
   it('should exec browser console', function(done) {

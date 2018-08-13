@@ -60,9 +60,13 @@ describe('should parse logger level from env', () => {
   })
 
   it('provider string invalid', () => {
-    assert.throws(() => parse('foo'), {
-      name: 'Error',
-      message: 'Given LOGGER_LEVEL was invaild, foo'
-    })
+    assert.throws(
+      () => parse('foo'),
+      // $FlowFixMe
+      {
+        name: 'Error',
+        message: 'Given LOGGER_LEVEL was invaild, foo'
+      }
+    )
   })
 })

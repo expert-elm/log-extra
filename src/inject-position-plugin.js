@@ -45,7 +45,7 @@ export default function plugin({ types: t }: any,
 
         return
       },
-      CallExpression(path: any, { filename }) {
+      CallExpression(path: any, { filename }: Object) {
 
         if(!path.node.loc) {
           return

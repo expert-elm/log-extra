@@ -31,10 +31,10 @@ import parse from './level-parser'
 export type Provider = {
   level: string,
   weight: number,
-  color: [string, string]
+  color: Array<string>
 }
 
-export type Metadata = {
+export type MetaData = {
   position?: Position
 }
 
@@ -44,7 +44,7 @@ export type Position = {
   filename: string
 }
 
-export type Handler = (Provider, string, string, string, string) => () => void
+export type Handler = (Provider, MetaData, string, string, string, string) => () => void
 
 type Options = {
   provider: Provider,
