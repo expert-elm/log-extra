@@ -1,4 +1,5 @@
 import path from 'path'
+import { SourceMapDevToolPlugin } from 'webpack'
 
 export default [{
   mode: process.env.NODE_ENV,
@@ -9,7 +10,13 @@ export default [{
     filename: 'index.js',
     library: 'Logger',
     libraryTarget: 'umd',
-    globalObject: 'this'
+    globalObject: 'this',
+    devtoolModuleFilenameTemplate: info => {
+      const fmt = `file:\/\/\/${path.resolve(info.resourcePath).replace(/\\/g, '\/').replace(/(\w):/, (_, a) => a.toUpperCase() + ':')}`
+      return info.allLoaders.length && !info.allLoaders.startsWith('css')
+        ? fmt + `?${info.hash}`
+        : fmt
+    }
   },
   module: {
     rules: [{
@@ -53,5 +60,30 @@ export default [{
     'chalk',
     'isomorphic-ws',
     './'
+  ]
+},{
+  mode: process.env.NODE_ENV,
+  target: 'node',
+  entry: path.resolve('src/inject-position-plugin.js'),
+  node: false,
+  output: {
+    path: path.resolve('.'),
+    filename: 'inject-position.js',
+    libraryTarget: 'commonjs2'
+  },
+  module: {
+    rules: [{
+      test: /.js$/,
+      use: 'babel-loader'
+    }]
+  },
+  optimization: {
+    minimize: false
+  },
+  plugins: [
+
+  ],
+  externals: [
+
   ]
 }]

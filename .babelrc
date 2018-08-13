@@ -30,13 +30,14 @@
   "env": {
     "test": {
       "plugins": [
-        "@babel/plugin-transform-modules-commonjs",
-        "@rabbitcc/babel/in-test"
+        "@babel/plugin-transform-modules-commonjs"
       ]
     },
     "production": {
       "plugins": [
-        "@rabbitcc/babel/remove-test"
+        ["@rabbitcc/babel/remove-test", {
+          "include": ["puppeteer", "fs", "@babel/core"]
+        }]
       ]
     }
   }

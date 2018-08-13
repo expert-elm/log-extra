@@ -1,0 +1,17 @@
+<!DOCUMENT>
+<html>
+  <head>
+    <script>process = {}; process.env = {};</script>
+    <script src="/index.js"></script>
+    <script>
+      <!-- sourceMap.SourceMapConsumer.initialize({ -->
+      <!-- "lib/mappings.wasm": "https://unpkg.com/source-map@0.7.3/lib/mappings.wasm" -->
+      <!-- }) -->
+      <!-- (new sourceMap.SourceMapConsumer(SoucemapCache[0])).then(consumer => consumer.originalPositionFor({ line: 2949, column: 10 })).then(console.log) -->
+      <!-- const consumer = new sourceMap.SourceMapConsumer(SoucemapCache[0]) -->
+      <!-- const pos = consumer.originalPositionFor({ line: 2949, column: 10 }) -->
+      <!-- console.log(pos) -->
+      Logger.info('foo', 'bar', 'baz')
+    </script>
+  </head>
+</html>

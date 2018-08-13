@@ -27,12 +27,21 @@ import chalk from 'chalk'
 import fmt from './datetime-formater'
 import pvd from './default-provider'
 import parse from './level-parser'
-import parseStack from './stack-parser'
 
 export type Provider = {
   level: string,
   weight: number,
   color: [string, string]
+}
+
+export type Metadata = {
+  position?: Position
+}
+
+export type Position = {
+  line: string,
+  column: string,
+  filename: string
 }
 
 export type Handler = (Provider, string, string, string, string) => () => void
@@ -49,9 +58,12 @@ export function createLogger({ provider, level, handler }: Options) {
       return
     }
     const datetime = fmt(new Date())
-    const stack = parseStack(new Error().stack)
-    console.log(stack)
-    handler(provider, name, datetime, action, String(content))()
+
+    /**
+     * meta data
+     */
+    const metadata = this || {}
+    handler(provider, metadata, name, datetime, action, String(content))()
   }
 }
 
