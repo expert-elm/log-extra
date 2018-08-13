@@ -1,4 +1,5 @@
 import path from 'path'
+import { SourceMapDevToolPlugin } from 'webpack'
 
 export default [{
   mode: process.env.NODE_ENV,
@@ -53,5 +54,30 @@ export default [{
     'chalk',
     'isomorphic-ws',
     './'
+  ]
+},{
+  mode: process.env.NODE_ENV,
+  target: 'node',
+  entry: path.resolve('src/inject-position-plugin.js'),
+  node: false,
+  output: {
+    path: path.resolve('.'),
+    filename: 'inject-position.js',
+    libraryTarget: 'commonjs2'
+  },
+  module: {
+    rules: [{
+      test: /.js$/,
+      use: 'babel-loader'
+    }]
+  },
+  optimization: {
+    minimize: false
+  },
+  plugins: [
+
+  ],
+  externals: [
+
   ]
 }]

@@ -18,11 +18,11 @@ export default function format(date: Date): string {
 
 /**
  * test
- *
- * @describe datetimeFormat()
  */
 import assert from 'assert'
 
-function $test_should_match_format() {
-  assert(/^\d{2}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}$/.test(format(new Date())))
-}
+describe('datetime formatter', function() {
+  it('should match format', function() {
+    assert(/^\d{2}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}$/.test(format(new Date())))
+  })
+})

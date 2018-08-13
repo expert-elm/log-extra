@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "test:node": "node -r @babel/register index.js",
+    "test:browser": "npx webpack-serve",
+    "test:node": "npm run test:node && npm run test:browser"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "@babel/register": "^7.0.0-rc.1",
+    "@rabbitcc/log": "file:../..",
+    "babel-loader": "^8.0.0-beta.4",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-serve": "^2.0.2"
+  }
+}
