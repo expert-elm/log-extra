@@ -73,9 +73,9 @@ There is some build-in logger levels:
 By the way, the `FATAL` level will highlight by background color.
 
 <details>
-
-<h3><summary>Feature, log sync on terminal and browser via `webpack-hot-client` socket server</summary></h3>
-
+<summary>
+Feature, log sync on terminal and browser via `webpack-hot-client` socket server
+</summary>
 
 ```js
 import log, { createSocket } from '@rabbitcc/log/socket'
@@ -105,7 +105,7 @@ serve: {
 
 <details>
 <summary>
-<h3> Feature, log with origin file position </h3>
+Feature, log with origin file position
 </summary>
 
 ![show origin file position](https://user-images.githubusercontent.com/5752902/44018351-0b1d63dc-9f0e-11e8-9b02-7625db60f730.png)
