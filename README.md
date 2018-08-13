@@ -74,33 +74,6 @@ By the way, the `FATAL` level will highlight by background color.
 
 
 
-### Feature, log sync on terminal and browser via `webpack-hot-client` socket server
-
-
-```js
-import log, { createSocket } from '@rabbitcc/log/socket'
-
-if('production' !== process.env.NODE_ENV) {
-  createSocket()
-}
-
-log.info('name', 'action', 'contents')
-```
-
-And log from terminal to browser:
-
-```js
-import { createSocket } from '@rabbitcc/log/socket'
-
-serve: {
-  on: {
-    listening() {
-      createSocket()
-    }
-  }
-}
-```
-
 
 
 ### Feature, log with origin file position
@@ -139,3 +112,50 @@ In browser, you need to add folder to **chrome devtools workspace**.
 This feature also works on terminal. Your terminal should support hyperlinks.
 
 ![cmder hyperlinks](https://user-images.githubusercontent.com/5752902/44021314-10aac3d6-9f17-11e8-9c9b-dd264dc058a5.gif)
+
+
+
+### Feature, log sync on terminal and browser via `webpack-hot-client` socket server
+
+If you want log both on terminal and browser, like this:
+
+![sync with terminal and browser](https://user-images.githubusercontent.com/5752902/44030168-88fd55a4-9f32-11e8-9255-bf01f5cd5840.gif)
+
+You can use `createSocket` with `webpack-serve` via WebSocket.
+
+Setup browsers:
+
+```js
+import log, { createSocket } from '@rabbitcc/log/socket'
+
+if('production' !== process.env.NODE_ENV) {
+  createSocket({ /* ...options see below */ })
+}
+
+log.info('name', 'action', 'contents')
+```
+
+And apply logger to `webpack.config.js`:
+
+```js
+import { createSocket } from '@rabbitcc/log/socket'
+
+serve: {
+  on: {
+    listening() {
+      createSocket({ /* ...options see below */ })
+    }
+  }
+}
+```
+
+The `createSocket` options:
+
+```js
+type CreateSocketOptions = {
+  /**
+   * socket url, default to webpack-hot-client ws socket string
+   */
+  socket?: string = 'ws://localhost:8081'
+}
+```
