@@ -49,8 +49,33 @@ plugins: [
 ]
 ```
 
+You can pass log level by number and string type, below syntax are vaild.
 
+```js
+cross-env LOGGER_LEVEL=warn
+cross-env LOGGER_LEVEL=WARN
+cross-env LOGGER_LEVEL=40
+```
+
+If `process.env.DEBUG` flag was found, the logger level is set to `DEBUG`.
+
+There is some build-in logger levels:
+
+| NAME  | WEIGHT | DEFAULT? |
+|-------|--------|----------|
+| trace | 100    |   no     |
+| debug | 80     |   no     |
+| info  | 60     |   yes    |
+| warn  | 40     |   no     |
+| error | 20     |   no     |
+| fatal |  0     |   no     |
+
+By the way, the `FATAL` level will highlight by background color.
+
+<details>
+<summary>
 ### Log sync on terminal and browser via `webpack-hot-client` socket server
+</summary>
 
 ```js
 import log, { createSocket } from '@rabbitcc/log/socket'
@@ -75,6 +100,7 @@ serve: {
   }
 }
 ```
+</details>
 
 ### Log with origin file position
 
