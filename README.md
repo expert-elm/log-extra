@@ -108,6 +108,6 @@ In browser, you need to add folder to **chrome devtools workspace**.
 
 ![browser workspace](https://user-images.githubusercontent.com/5752902/44018496-925f25c4-9f0e-11e8-8eac-01db00148c0d.gif)
 
-this feature also works on terminal:
+This feature also works on terminal. Your terminal should support hyperlinks.
 
 ![cmder hyperlinks](https://user-images.githubusercontent.com/5752902/44021314-10aac3d6-9f17-11e8-9c9b-dd264dc058a5.gif)

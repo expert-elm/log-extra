@@ -8,8 +8,8 @@ import chalk from 'chalk'
 import startsCase from './starts-case'
 import type { Provider, Metadata, Position } from './'
 
-export default function handler({ level, color }: Provider,
-                                { position }: Metadata,
+export default function handler({ level, color }: Provider = {},
+                                { position }: Metadata = {},
                                 name: string,
                                 datetime: string,
                                 action: string,
@@ -59,3 +59,44 @@ function makePositionTpl({ line, column, filename }: Position): string {
  */
 
 import assert from 'assert'
+
+describe('terminal client', function() {
+  it('should apply position tpl', function() {
+    assert(
+      makePositionTpl({ line: '1', column: '2', filename: 'foo' }),
+      chalk.gray(`@ foo:1,2`)
+    )
+  })
+
+  it('should apply tpl', function() {
+    assert(
+      makeTpl('foo', 'bar', 'baz', 'qux'),
+      `${chalk.bold('bar')}| baz [  FOO] <${chalk.bold('qux')}>`
+    )
+  })
+
+  it('should apply tpl with name and level', function() {
+    assert(
+      makeTpl('foo', 'ba', 'baz', 'qux'),
+      `${chalk.bold(' ba')}| baz [  FOO] <${chalk.bold('qux')}>`
+    )
+  })
+
+  it('should apply tpl slice name and level', function() {
+    assert(
+      makeTpl('foooo', 'barr', 'baz', 'qux'),
+      `${chalk.bold('bar')}| baz [FOOOO] <${chalk.bold('qux')}>`
+    )
+  })
+
+  it('should throw when color not given', function() {
+    assert.throws(() => {
+      handler({ color: [] })
+    }, {
+      name: 'Error',
+      message: `\
+Can't find provider color, the color should be \
+[color1, color2, color3, ...and more optional colors]`
+    })
+  })
+})

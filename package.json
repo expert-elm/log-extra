@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run build",
     "build": "cross-env NODE_ENV=production npx webpack -r esm",
+    "pretest": "npm run build",
     "test": "cross-env NODE_ENV=test npx mocha --exit -r jsdom-global/register -r @babel/register -r esm src",
     "type": "npx flow check",
     "prepublishOnly": "npm run test && npm run type && npm run build"
