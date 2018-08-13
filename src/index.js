@@ -75,7 +75,9 @@ const handler = 'undefined' === typeof window
       ? require('./terminal-client').default
       : require('./browser-client').default
 
-const level = parse(process.env.LOGGER_LEVEL) || pvd.info.weight
+const level = process.env.DEBUG
+      ? pvd.debug.weight
+      : (parse(process.env.LOGGER_LEVEL) || pvd.info.weight)
 
 export const trace = createLogger({ handler, level, provider: pvd.trace })
 export const debug = createLogger({ handler, level, provider: pvd.debug })
