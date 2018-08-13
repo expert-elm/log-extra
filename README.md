@@ -45,7 +45,7 @@ plugins: [
 
   // or pass default level if not set
 
-  new EnvironmentPlugin({ LOGGER_LEVEL: 'DEBUG' }),
+  new EnvironmentPlugin({ LOGGER_LEVEL: process.env.LOGGER_LEVEL }),
 ]
 ```
 
@@ -62,7 +62,7 @@ if('production' !== process.env.NODE_ENV) {
 log.info('name', 'action', 'contents')
 ```
 
-and log from terminal to browser:
+And log from terminal to browser:
 
 ```js
 import { createSocket } from '@rabbitcc/log/socket'
@@ -75,3 +75,39 @@ serve: {
   }
 }
 ```
+
+### Log with origin file position
+
+![show origin file position](https://user-images.githubusercontent.com/5752902/44018351-0b1d63dc-9f0e-11e8-9b02-7625db60f730.png)
+
+Enable this feature need setup as babel plugins:
+
+```js
+{
+  "plugins": ["@rabbitcc/log/inject-position"]
+}
+
+// setup with options
+
+{
+  "plugins": [["@rabbitcc/log/inject-position", {
+    // ...options see below
+  }]]
+}
+```
+
+The inject position plugin options:
+
+```js
+type InjectPositionPluginOptions = {
+  test?: RegExp = /^@rabbitcc\/log/
+}
+```
+
+In browser, you need to add folder to **chrome devtools workspace**.
+
+![browser workspace](https://user-images.githubusercontent.com/5752902/44018496-925f25c4-9f0e-11e8-8eac-01db00148c0d.gif)
+
+this feature also works on terminal:
+
+![cmder hyperlinks](https://user-images.githubusercontent.com/5752902/44021314-10aac3d6-9f17-11e8-9c9b-dd264dc058a5.gif)

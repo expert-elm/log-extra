@@ -5,12 +5,11 @@
  */
 
 type Options = {
-  test?: RegExp,
-  include?: Array<string>
+  test?: RegExp
 }
 
 export default function plugin({ types: t }: any,
-                               { test, include = [] }: Options) {
+                               { test = /^@rabbitcc\/log/ }: Options) {
 
   const caller = []
 
@@ -19,7 +18,7 @@ export default function plugin({ types: t }: any,
       ImportDeclaration(path: any) {
         const value = path.node.source.value
 
-        if(!/^@rabbitcc\/log/.test(value)) {
+        if(!test.test(value)) {
           return
         }
 
@@ -145,6 +144,10 @@ export default function plugin({ types: t }: any,
   }
 }
 
+
+/**
+ * test
+ */
 
 import assert from 'assert'
 import { transform } from '@babel/core'
@@ -275,6 +278,29 @@ log.info.bind({
 log1.info.bind({
   position: {
     line: "4",
+    column: "1",
+    filename: "unknow"
+  }
+})('foo', 'bar', 'baz');`)
+  })
+
+  it('should support custom test', function() {
+    const code = `\
+import { info } from 'foo'
+
+info('foo', 'bar', 'baz')
+`
+
+    const result = transform(code, {
+      babelrc: false,
+      plugins: [[plugin, { test: /^foo/ }]]
+    })
+
+    assert(result.code == `\
+import { info } from 'foo';
+info.bind({
+  position: {
+    line: "3",
     column: "1",
     filename: "unknow"
   }

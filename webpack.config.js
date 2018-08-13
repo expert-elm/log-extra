@@ -10,13 +10,7 @@ export default [{
     filename: 'index.js',
     library: 'Logger',
     libraryTarget: 'umd',
-    globalObject: 'this',
-    devtoolModuleFilenameTemplate: info => {
-      const fmt = `file:\/\/\/${path.resolve(info.resourcePath).replace(/\\/g, '\/').replace(/(\w):/, (_, a) => a.toUpperCase() + ':')}`
-      return info.allLoaders.length && !info.allLoaders.startsWith('css')
-        ? fmt + `?${info.hash}`
-        : fmt
-    }
+    globalObject: 'this'
   },
   module: {
     rules: [{
