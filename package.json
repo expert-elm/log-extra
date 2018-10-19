@@ -1,6 +1,6 @@
 {
   "name": "@rabbitcc/log",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "A log tool",
   "main": "index.js",
   "browser": "browser.js",
@@ -24,6 +24,7 @@
     "@babel/core": "^7.0.0-beta.49",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.49",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0-beta.49",
     "@babel/preset-flow": "^7.0.0-beta.49",
     "@babel/register": "^7.0.0-beta.56",
