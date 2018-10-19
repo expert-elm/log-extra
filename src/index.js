@@ -23,7 +23,6 @@
  * @flow
  */
 
-import chalk from 'chalk'
 import fmt from './datetime-formater'
 import pvd from './default-provider'
 import parse from './level-parser'
@@ -71,9 +70,7 @@ export function createLogger({ provider, level, handler }: Options) {
  * export api
  */
 
-const handler = 'undefined' === typeof window
-      ? require('./terminal-client').default
-      : require('./browser-client').default
+const handler = require(`./${process.env.TARGET || 'terminal'}-client`).default
 
 const level = process.env.DEBUG
       ? pvd.debug.weight

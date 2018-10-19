@@ -1,8 +1,9 @@
 {
   "name": "@rabbitcc/log",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "A log tool",
   "main": "index.js",
+  "browser": "browser.js",
   "scripts": {
     "start": "npm run build",
     "build": "cross-env NODE_ENV=production npx webpack -r esm",

@@ -1,5 +1,5 @@
 import path from 'path'
-import { SourceMapDevToolPlugin } from 'webpack'
+import { DefinePlugin } from 'webpack'
 
 export default [{
   mode: process.env.NODE_ENV,
@@ -7,10 +7,9 @@ export default [{
   entry: path.resolve('src/index.js'),
   output: {
     path: path.resolve('.'),
-    filename: 'index.js',
+    filename: 'browser.js',
     library: 'Logger',
-    libraryTarget: 'umd',
-    globalObject: 'this'
+    libraryTarget: 'window'
   },
   module: {
     rules: [{
@@ -22,7 +21,36 @@ export default [{
     minimize: false
   },
   plugins: [
+    new DefinePlugin({
+      ['process.env.TARGET']: JSON.stringify('browser')
+    })
+  ],
+  externals: [
 
+  ]
+},{
+  mode: process.env.NODE_ENV,
+  node: false,
+  entry: path.resolve('src/index.js'),
+  output: {
+    path: path.resolve('.'),
+    filename: 'index.js',
+    library: 'Logger',
+    libraryTarget: 'commonjs2'
+  },
+  module: {
+    rules: [{
+      test: /.js$/,
+      use: 'babel-loader'
+    }]
+  },
+  optimization: {
+    minimize: false
+  },
+  plugins: [
+    new DefinePlugin({
+      ['process.env.TARGET']: JSON.stringify('terminal')
+    })
   ],
   externals: [
     'chalk'

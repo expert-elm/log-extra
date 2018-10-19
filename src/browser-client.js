@@ -166,7 +166,7 @@ Can't find provider color, the color should be \
   })
 
   it('should exec browser console', function(done) {
-    const script = fs.readFileSync('./index.js', 'utf-8')
+    const script = fs.readFileSync('./browser.js', 'utf-8')
     browserConsoleOutput({
       requires: [
         'process = {};process.env = {};',
@@ -189,7 +189,7 @@ Can't find provider color, the color should be \
   })
 
   it('should exec browser console with colorful logger level', function(done) {
-    const script = fs.readFileSync('./index.js', 'utf-8')
+    const script = fs.readFileSync('./browser.js', 'utf-8')
     browserConsoleOutput({
       requires: [
         'process = {};process.env = {};',
@@ -212,7 +212,7 @@ Can't find provider color, the color should be \
   })
 
   it('should exec browser console background with fatal logger level', function(done) {
-    const script = fs.readFileSync('./index.js', 'utf-8')
+    const script = fs.readFileSync('./browser.js', 'utf-8')
     browserConsoleOutput({
       requires: [
         'process = {};process.env = {};',
