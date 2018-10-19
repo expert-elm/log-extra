@@ -18,9 +18,6 @@ export default [{
       use: 'babel-loader'
     }]
   },
-  optimization: {
-    minimize: false
-  },
   plugins: [
     new DefinePlugin({
       ['process.env.TARGET']: JSON.stringify('browser')
@@ -44,9 +41,6 @@ export default [{
       test: /.js$/,
       use: 'babel-loader'
     }]
-  },
-  optimization: {
-    minimize: false
   },
   plugins: [
     new DefinePlugin({
@@ -73,9 +67,6 @@ export default [{
       use: 'babel-loader'
     }]
   },
-  optimization: {
-    minimize: false
-  },
   plugins: [
 
   ],
@@ -99,9 +90,6 @@ export default [{
       test: /.js$/,
       use: 'babel-loader'
     }]
-  },
-  optimization: {
-    minimize: false
   },
   plugins: [
 

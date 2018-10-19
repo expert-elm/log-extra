@@ -34,6 +34,16 @@
       ]
     },
     "production": {
+      "presets": [
+        ["@babel/preset-env", {
+          "targets": {
+            "browsers": ["last 2 versions", "ie >= 8"]
+          },
+          "modules": false,
+          "loose": true,
+          "debug": true
+        }]
+      ],
       "plugins": [
         ["@rabbitcc/babel/remove-test", {
           "include": ["puppeteer", "fs", "@babel/core"]
