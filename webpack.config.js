@@ -9,7 +9,8 @@ export default [{
     path: path.resolve('.'),
     filename: 'browser.js',
     library: 'Logger',
-    libraryTarget: 'window'
+    libraryTarget: 'umd',
+    globalObject: 'this'
   },
   module: {
     rules: [{

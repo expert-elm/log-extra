@@ -1,6 +1,6 @@
 {
   "name": "@rabbitcc/log",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "A log tool",
   "main": "index.js",
   "browser": "browser.js",
