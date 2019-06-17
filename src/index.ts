@@ -19,8 +19,6 @@
  * @env LOGGER_APPLYCONSOLE
  * @env LOGGER_MOMENTFORMAT
  * @env LOGGER_FORMAT
- *
- * @flow
  */
 
 import fmt from './datetime-formater'
@@ -43,7 +41,9 @@ export type Position = {
   filename: string
 }
 
-export type Handler = (Provider, MetaData, string, string, string, string) => () => void
+export interface Handler {
+  (provider: Provider, meta: MetaData, name: string, datetime: string, action: string, content: string): () => void
+}
 
 type Options = {
   provider: Provider,
@@ -52,7 +52,7 @@ type Options = {
 }
 
 export function createLogger({ provider, level, handler }: Options) {
-  return function log(name: string, action: string, content: string): void {
+  return function log(this: any, name: string, action: string, content: string): void {
     if(provider.weight > level) {
       return
     }
@@ -74,7 +74,9 @@ const handler = require(`./${process.env.TARGET || 'terminal'}-client`).default
 
 const level = process.env.DEBUG
       ? pvd.debug.weight
-      : (parse(process.env.LOGGER_LEVEL) || pvd.info.weight)
+      : process.env.LOGGER_LEVEL
+      ? parse(process.env.LOGGER_LEVEL)
+      : pvd.info.weight
 
 export const trace = createLogger({ handler, level, provider: pvd.trace })
 export const debug = createLogger({ handler, level, provider: pvd.debug })
@@ -91,8 +93,3 @@ export default {
   error,
   fatal
 }
-
-
-/**
- * test
- */

@@ -1,8 +1,3 @@
-/**
- * format datetime
- *
- * @flow
- */
 
 export default function format(date: Date): string {
   const year = (date.getFullYear() % 100).toString()
@@ -16,13 +11,13 @@ export default function format(date: Date): string {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${millseconds}`
 }
 
-/**
- * test
- */
-import assert from 'assert'
+// /**
+//  * test
+//  */
+// import assert from 'assert'
 
-describe('datetime formatter', function() {
-  it('should match format', function() {
-    assert(/^\d{2}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}$/.test(format(new Date())))
-  })
-})
+// describe('datetime formatter', function() {
+//   it('should match format', function() {
+//     assert(/^\d{2}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}$/.test(format(new Date())))
+//   })
+// })

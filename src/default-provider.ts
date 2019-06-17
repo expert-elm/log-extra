@@ -1,9 +1,3 @@
-/**
- * build-in providers
- *
- * @flow
- */
-
 export default {
   trace: {
     level: 'trace',
