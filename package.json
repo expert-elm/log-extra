@@ -1,38 +1,33 @@
 {
-  "name": "@rabbitcc/log",
-  "version": "0.4.6",
-  "description": "A log tool",
+  "name": "log-extra",
+  "version": "0.0.0",
+  "description": "Yet another log tool",
   "main": "index.js",
   "browser": "browser.js",
+  "module": "module/index.mjs",
   "scripts": {
-    "start": "npm run build",
-    "build": "cross-env NODE_ENV=production npx webpack -r esm",
-    "pretest": "npm run build",
-    "test": "cross-env NODE_ENV=test npx mocha --exit -r jsdom-global/register -r @babel/register -r esm src",
-    "type": "npx flow check",
-    "prepublishOnly": "npm run test && npm run type && npm run build"
+    "start": "tsc -w",
+    "prebuild": "rm dist -r",
+    "build:node": "tsc",
+    "build:browser": "webpack --entry ./src/browser.ts -p -o dist/browser.js --output-library=Logger --output-library-target=window --module-bind ts=ts-loader --resolve-extensions .ts --devtool source-map",
+    "build": "npm run build:node && npm run build:browser"
   },
-  "keywords": [],
-  "author": "Rabbit<yfhj1990@hotmail.com>",
-  "license": "GPL-3.0",
-  "files": [
-    "index.js",
-    "socket.js",
-    "inject-position.js"
+  "keywords": [
+    "log"
   ],
+  "author": "HairyRabbit<yfhj1990@hotmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.8",
-    "jest": "^24.8.0",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.5.2"
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.2",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "isomorphic-ws": "^4.0.1",
-    "ws": "^6.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
+    "tslib": "^1.10.0",
+    "util-extra": "0.0.19"
   }
 }

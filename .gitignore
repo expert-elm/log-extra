@@ -65,3 +65,7 @@ flow-typed/
 
 /*.js
 !webpack.config.js
+
+dist
+tsconfig.tsbuildinfo
+.vscode
