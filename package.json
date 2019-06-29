@@ -7,7 +7,7 @@
   "module": "module/index.mjs",
   "scripts": {
     "start": "tsc -w",
-    "prebuild": "rm dist -r",
+    "prebuild": "rm dist -rf",
     "build:cjs": "tsc",
     "build:browser": "webpack --entry ./src/browser.ts -p -o dist/browser.js --output-library=Logger --output-library-target=window --module-bind ts=ts-loader --resolve-extensions .ts --devtool source-map",
     "build:mjs": "ts-repack mjs -o dist/module",
