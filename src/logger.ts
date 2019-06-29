@@ -32,12 +32,12 @@ function isMetaData(object: any): boolean {
 
 export interface Logger {
   (this: MetaData | void, name: string, action: string, ...message: any[]): void
-  fatal(this: MetaData | void, name: string, action: string, ...message: any[]): void
-  error(this: MetaData | void, name: string, action: string, ...message: any[]): void
-  warn(this: MetaData | void, name: string, action: string, ...message: any[]): void
-  info(this: MetaData | void, name: string, action: string, ...message: any[]): void
-  debug(this: MetaData | void, name: string, action: string, ...message: any[]): void
-  trace(this: MetaData | void, name: string, action: string, ...message: any[]): void
+  fatal(this: MetaData | void | Logger, name: string, action: string, ...message: any[]): void
+  error(this: MetaData | void | Logger, name: string, action: string, ...message: any[]): void
+  warn(this: MetaData | void | Logger, name: string, action: string, ...message: any[]): void
+  info(this: MetaData | void | Logger, name: string, action: string, ...message: any[]): void
+  debug(this: MetaData | void | Logger, name: string, action: string, ...message: any[]): void
+  trace(this: MetaData | void | Logger, name: string, action: string, ...message: any[]): void
 }
 
 export default function createLogger(handler: Handler, options: Options = {}): Logger {
