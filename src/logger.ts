@@ -31,20 +31,20 @@ function isMetaData(object: any): boolean {
 }
 
 export interface Logger {
-  (this: MetaData, name: string, action: string, ...message: any[]): void
-  fatal(this: MetaData, name: string, action: string, ...message: any[]): void
-  error(this: MetaData, name: string, action: string, ...message: any[]): void
-  warn(this: MetaData, name: string, action: string, ...message: any[]): void
-  info(this: MetaData, name: string, action: string, ...message: any[]): void
-  debug(this: MetaData, name: string, action: string, ...message: any[]): void
-  trace(this: MetaData, name: string, action: string, ...message: any[]): void
+  (this: MetaData | void, name: string, action: string, ...message: any[]): void
+  fatal(this: MetaData | void, name: string, action: string, ...message: any[]): void
+  error(this: MetaData | void, name: string, action: string, ...message: any[]): void
+  warn(this: MetaData | void, name: string, action: string, ...message: any[]): void
+  info(this: MetaData | void, name: string, action: string, ...message: any[]): void
+  debug(this: MetaData | void, name: string, action: string, ...message: any[]): void
+  trace(this: MetaData | void, name: string, action: string, ...message: any[]): void
 }
 
 export default function createLogger(handler: Handler, options: Options = {}): Logger {
   const { env, level = getDefaultLevel(env), writter = console.log } = options
 
   function factory(loglevel: Level) {
-    return function log(this: MetaData, name: string = '', action: string = '', ...message: any[]) {
+    return function log(this: MetaData | void, name: string = '', action: string = '', ...message: any[]) {
       if(loglevel > level) {
         return
       }
@@ -70,7 +70,6 @@ export default function createLogger(handler: Handler, options: Options = {}): L
   log.info = factory(Level.Info)
   log.debug = factory(Level.Debug)
   log.trace = factory(Level.Trace)
-
 
   return log
 }
