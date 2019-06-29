@@ -2,11 +2,11 @@
 
 # log-extra
 
-___yet anthor logger tool___
+_yet anthor logger tool_
 
 
 
-___`npm i -D log-extra`___
+_`npm i -D log-extra`_
 
 
 </div>
