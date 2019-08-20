@@ -16,7 +16,7 @@
   "keywords": [
     "log"
   ],
-  "author": "HairyRabbit<yfhj1990@hotmail.com>",
+  "author": "HairyRabbit <yfhj1990@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.15",
